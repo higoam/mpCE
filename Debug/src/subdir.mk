@@ -4,15 +4,27 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
+../src/Counterexample.cpp \
 ../src/Flags.cpp \
+../src/GenerateFiles.cpp \
+../src/RunAlgorithm.cpp \
+../src/SetExperiments.cpp \
 ../src/mpCE.cpp 
 
 OBJS += \
+./src/Counterexample.o \
 ./src/Flags.o \
+./src/GenerateFiles.o \
+./src/RunAlgorithm.o \
+./src/SetExperiments.o \
 ./src/mpCE.o 
 
 CPP_DEPS += \
+./src/Counterexample.d \
 ./src/Flags.d \
+./src/GenerateFiles.d \
+./src/RunAlgorithm.d \
+./src/SetExperiments.d \
 ./src/mpCE.d 
 
 

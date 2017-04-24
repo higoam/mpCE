@@ -33,12 +33,6 @@ bool Flags::checksFlags(int argc, char *argv[]){
 	string flag_value;
 
 
-	if(checkInputFileFormat(string(argv[1])) == 0){
-
-		cout << "Incorrect file extension" << endl;
-		return false;
-	}
-
 	if( argc == 2 ){	// Check Help, Version and Standard Execution, 2 tickets
 
 		if(string(argv[1]) == "--help"){
@@ -53,7 +47,10 @@ bool Flags::checksFlags(int argc, char *argv[]){
 
 		} else {
 
-			// Start Default Settings
+			if(checkInputFileFormat(string(argv[1])) == 0){
+				cout << "Incorrect file extension" << endl;
+				return false;
+			}
 
 		}
 
@@ -104,13 +101,20 @@ bool Flags::checksFlags(int argc, char *argv[]){
 
 
 
-int Flags::checkInputFileFormat(string str){
+int Flags::checkInputFileFormat(string name){
 
-	int var = 1;
+	size_t found = name.find(".");
 
-	return var;
+	if(found!=string::npos){
+		string extension = name.substr(found,name.length());
+		if(extension == ".func"){
+			nameFile = name.substr(0,found);
+			return 1;
+		}
+	}
+
+	return 0;
 }
-
 
 
 void Flags::printHelp(){

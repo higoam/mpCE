@@ -17,6 +17,10 @@ using namespace std;
 
 class Flags {
 public:
+
+	int inputForm;
+	string nameFile;
+
 	Flags();
 	virtual ~Flags();
 
