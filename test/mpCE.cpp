@@ -125,7 +125,7 @@ int main(int argc, char *argv[ ]) {
           position = auxString.find("!");
           sum = auxString.substr(0,position);
 
-          cout << "|" + sum + "| ->"<< endl;
+          cout << "|" + sum + "| -> ";
 
           auxString = auxString.substr(position+2,auxString.length());
           position = auxString.find("!");

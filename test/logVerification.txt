@@ -50,5 +50,5 @@ Running propositional reduction
 Solving with MiniSAT 2.2.0 with simplifier
 15791 variables, 75542 clauses
 SAT checker: negated claim is UNSATISFIABLE, i.e., holds
-Runtime decision procedure: 0.207s
+Runtime decision procedure: 0.312s
 VERIFICATION SUCCESSFUL
