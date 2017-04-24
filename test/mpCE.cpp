@@ -19,8 +19,7 @@ void generateVerificationFile(string matrix, int lowerCost, int size, int start)
 string matrixFormtVerification(string textFile, int size);
 string cutSpace(string textFile, int size);
 void runOptimization(string matrix, int size, int start);
-
-
+string getRoute(string steps, int n);
 
 int main(int argc, char *argv[ ]) {
 
@@ -39,7 +38,40 @@ int main(int argc, char *argv[ ]) {
   return 0;
 }
 
+  /*******************************************************************\
+  Method:
+  Inputs:
+  Outputs:
+  Purpose:
+  \*******************************************************************/
+  string getRoute(string steps, int n)
+  {
+    string routeFind="|";
+    string strAux;
+    string findStr;
+    int j;
+    int position1, position2;
 
+    for(j=1;j<=n;j++){
+
+      strAux = steps;
+      findStr = "{" + convertIntString(j) + "#";      
+
+      position1 = strAux.find(findStr);
+      strAux = strAux.substr(position1,strAux.length());     
+
+      position1 = strAux.find("#");
+      strAux = strAux.substr(position1+1,strAux.length());
+
+      position1 = strAux.find("}");
+      strAux = strAux.substr(0,position1);
+
+      routeFind = routeFind + strAux + "|";
+
+    }
+
+    return routeFind;
+  }
 
 
 
@@ -51,6 +83,9 @@ int main(int argc, char *argv[ ]) {
   \*******************************************************************/
   void updateVerificationFile(string newF_C)
   {
+
+
+
 
 
   }
@@ -68,6 +103,10 @@ int main(int argc, char *argv[ ]) {
     string command = "./cbmc fileVerification.c > logVerification.txt";
     bool condition = true;
 
+    size_t position;
+    string auxString;
+    string sum;
+    string route;
  
     while(condition)
     {
@@ -79,17 +118,24 @@ int main(int argc, char *argv[ ]) {
 
         if(found_F!=std::string::npos)
         {
-          size_t position;
-          string auxString = fileLog;
+          auxString = fileLog;
 
           position = auxString.rfind("SOMA = ");
           auxString = auxString.substr(position+7,auxString.length());     
-          position = auxString.rfind("!");
-          auxString = auxString.substr(0,position);
+          position = auxString.find("!");
+          sum = auxString.substr(0,position);
 
-          cout << "|" + auxString + "|"<< endl;
+          cout << "|" + sum + "| ->"<< endl;
 
-          generateVerificationFile(matrix, convertStringInt(auxString), size, start);
+          auxString = auxString.substr(position+2,auxString.length());
+          position = auxString.find("!");
+          auxString = auxString.substr(0,position-1);
+          route = getRoute(auxString, size);
+
+          cout << route << endl;
+
+//          break;
+          generateVerificationFile(matrix, convertStringInt(sum), size, start);
 
         }
         else if(found_S!=std::string::npos)
@@ -159,7 +205,7 @@ int main(int argc, char *argv[ ]) {
     file_min << "    int main(){\n";
     file_min << "    \n";
     file_min << "      int Qdestiny = "+ convertIntString(size) + ";\n";
-    file_min << "      int start = 2;\n";
+    file_min << "      int start = 5;\n";
     file_min << "      int lastD = start;\n";
     file_min << "      int step = 1;\n";
     file_min << "\n";
@@ -196,9 +242,9 @@ int main(int argc, char *argv[ ]) {
     file_min << "      printf(\"SOMA = %d!\",soma);\n";
     file_min << "      \n";
     for(i=0;i<size;i++){
-      file_min << "      printf(\"" + convertIntString(i) + " ###.. %d\",vet_destiny[" + convertIntString(i) + "]);\n";
+      file_min << "      printf(\"{%d#" + convertIntString(i) + "}\",vet_destiny[" + convertIntString(i) + "]);\n";
     }
-
+    file_min << "      printf(\"!\");\n";
     file_min << "      \n";
     file_min << "      assert( soma >= soma_ant);\n";
     file_min << "      return 0;\n";
@@ -279,6 +325,7 @@ int main(int argc, char *argv[ ]) {
     return textFile;
   }
 
+  //*****************************************
 
 	string convertIntString(int value)
 	{
