@@ -1,4 +1,4 @@
-#define soma_ant 10
+#define soma_ant 13
 #include <stdio.h>
 
     int nondet_int();
@@ -25,7 +25,7 @@
     int main(){
     
       int Qdestiny = 6;
-      int start = 5;
+      int start = 0;
       int lastD = start;
       int step = 1;
 
@@ -53,6 +53,8 @@
         step = step + 1;
         vet_destiny[lastD] = step;
       }
+      
+      soma = soma + mat[lastD][start];
       
       __CPROVER_assume ( soma < soma_ant);
       

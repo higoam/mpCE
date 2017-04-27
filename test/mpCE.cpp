@@ -205,7 +205,7 @@ int main(int argc, char *argv[ ]) {
     file_min << "    int main(){\n";
     file_min << "    \n";
     file_min << "      int Qdestiny = "+ convertIntString(size) + ";\n";
-    file_min << "      int start = 5;\n";
+    file_min << "      int start = 0;\n";
     file_min << "      int lastD = start;\n";
     file_min << "      int step = 1;\n";
     file_min << "\n";
@@ -236,6 +236,8 @@ int main(int argc, char *argv[ ]) {
     file_min << "        step = step + 1;\n";
     file_min << "        vet_destiny[lastD] = step;\n";
     file_min << "      }\n";
+    file_min << "      \n";
+    file_min << "      soma = soma + mat[lastD][start];\n";
     file_min << "      \n";
     file_min << "      __CPROVER_assume ( soma < soma_ant);\n";
     file_min << "      \n";

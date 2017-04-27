@@ -42,13 +42,13 @@ Unwinding loop c::get_destination.0 iteration 4 file fileVerification.c line 12 
 Unwinding loop c::get_destination.0 iteration 5 file fileVerification.c line 12 function get_destination thread 0
 Unwinding loop c::get_destination.0 iteration 6 file fileVerification.c line 12 function get_destination thread 0
 Unwinding loop c::main.0 iteration 5 file fileVerification.c line 49 function main thread 0
-size of program expression: 391 steps
+size of program expression: 392 steps
 simple slicing removed 13 assignments
 Generated 1 VCC(s), 1 remaining after simplification
 Passing problem to propositional reduction
 Running propositional reduction
 Solving with MiniSAT 2.2.0 with simplifier
-15791 variables, 75542 clauses
+18090 variables, 88760 clauses
 SAT checker: negated claim is UNSATISFIABLE, i.e., holds
-Runtime decision procedure: 0.312s
+Runtime decision procedure: 0.236s
 VERIFICATION SUCCESSFUL
